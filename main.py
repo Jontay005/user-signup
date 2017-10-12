@@ -13,8 +13,8 @@ app.config['DEBUG'] = True
 @app.route("/")
 def index():
     
-    template = jinja_env.get_template('hello.html')
     username = request.args.get('username')
+    email = request.args.get('email')
     uerror = request.args.get('uerror')
     perror = request.args.get('perror')
     perror2 = request.args.get('perror2')
@@ -22,7 +22,7 @@ def index():
     error = request.args.get('error')
 
     return render_template('hello.html', error=error, uerror=uerror, 
-        perror=perror, perror2=perror2, eerror=eerror, username=username)
+        perror=perror, perror2=perror2, eerror=eerror, username=username, email=email)
 
 @app.route("/welcome", methods=['POST'])
 def hello():
@@ -51,38 +51,23 @@ def welcome():
                         return render_template('welcome.html', name=username)   
                     else:
                         eerror = "Email not valid"
-                        return redirect('/?eerror=' + eerror)
+                        return redirect('/?eerror=' + eerror + '&username=' + username + '&email=' + email)
                 else:
                     return render_template('welcome.html', name=username)
                 #return render_template('welcome.html') 
             else:
                 perror2 = "p1 doesnt match p2"
-                return redirect('/?perror2=' + perror2)
+                return redirect('/?perror2=' + perror2 + '&username=' + username + '&email=' + email)
                 #return render_template('hello.html', perror2=perror2)       
         else:
             perror = "password must b btw 3 and 20 chars and no space "
-            return redirect('/?perror=' + perror)
+            return redirect('/?perror=' + perror + '&username=' + username + '&email=' + email)
             #return render_template('hello.html', perror=perror) 
     else:
         uerror = "username must b btw 3 and 20 chars and no space"
-        return redirect('/?uerror=' + uerror)
+        return redirect('/?uerror=' + uerror + '&username=' + username + '&email=' + email)
         #return render_template('hello.html', uerror=uerror)
-
-    '''if ' ' in username  or not ( len(username) > 3 and len(username) < 20):
-        uerror = "usrnm cannot have blanks dummy!"
-        return render_template('hello.html', uerror=uerror)    
-    else:
-        return template.render(name=username)'''
-
-
-    '''if email is not "":
-        if '@' in email and '.' in email:
-            return template.render(name=username)
-        else:
-            eerror = "Please enter valid email"
-            return render_template('hello.html', eerror=eerror)
-    else:
-        return template.render(name=username)'''        
+       
     
     '''for input in inputs:    
         if (input == " "):
