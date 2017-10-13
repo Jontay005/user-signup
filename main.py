@@ -15,10 +15,10 @@ def index():
     
     username = request.args.get('username')
     email = request.args.get('email')
-    uerror = request.args.get('uerror')
-    perror = request.args.get('perror')
-    perror2 = request.args.get('perror2')
-    eerror = request.args.get('eerror')
+    uerror = request.args.get('uerror', '')
+    perror = request.args.get('perror', '')
+    perror2 = request.args.get('perror2', '')
+    eerror = request.args.get('eerror', '')
     error = request.args.get('error')
 
     return render_template('hello.html', error=error, uerror=uerror, 
