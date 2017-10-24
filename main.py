@@ -13,8 +13,8 @@ app.config['DEBUG'] = True
 @app.route("/")
 def index():
     
-    username = request.args.get('username')
-    email = request.args.get('email')
+    username = request.args.get('username', '')
+    email = request.args.get('email', '')
     uerror = request.args.get('uerror', '')
     perror = request.args.get('perror', '')
     perror2 = request.args.get('perror2', '')
